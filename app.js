@@ -1,4 +1,5 @@
 /*-------------------------------- Constants --------------------------------*/
+// This can be removed since I did the checkForWinner manually in the function
 const winningCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -9,24 +10,22 @@ const winningCombos = [
     [0, 4, 8],
     [2, 4, 6]
 ]
-
 /*------------------------ Cached Element References ------------------------*/
 const message = document.querySelector('#message')
 const squareEls = document.querySelectorAll('.sqr')
-
+const resetBtnEl = document.querySelector('#reset')
 /*-------------------------------- Variables --------------------------------*/
 let board
 let turn
 let winner
 let tie
-
 /*----------------------------- Event Listeners -----------------------------*/
 squareEls.forEach(function (square) {
     square.addEventListener('click', handleClick)
 })
 
+resetBtnEl.addEventListener('click', init)
 /*-------------------------------- Functions --------------------------------*/
-
 function init() {
     board = ['', '', '', '', '', '', '', '', '']
     turn = 'X'
@@ -72,11 +71,9 @@ function handleClick(event) {
 
     checkForWinner()
 
-    if (turn === 'X') {
-        turn = 'O'
-    } else {
-        turn = 'X'
-    }
+    checkForTie()
+
+    switchPlayerTurn()
 
     render()
 }
@@ -137,3 +134,32 @@ function checkForWinner() {
         winner = turn
     }
 }
+
+function checkForTie() {
+
+    if (winner) {
+        return
+    }
+
+    if (board.includes('')) {
+        tie = false
+    } else {
+        tie = true
+    }
+}
+
+function switchPlayerTurn() {
+
+    if (winner) {
+        return
+    }
+
+    if (turn === 'X') {
+        turn = 'O'
+    } else {
+        turn = 'X'
+    }
+}
+//This has been exhausting but the payoff is worth it to see my creation
+
+// and yes I gave up and looked at the lab sue me

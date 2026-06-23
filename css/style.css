@@ -20,11 +20,13 @@ body {
     border: 5px solid black;
     font-size: 64px;
     text-align: center;
-    border-radius: 10%;
+    border-radius: 20%;
+    transition: 0.5s;
 }
 
 .sqr:hover {
-    background-color: brown;
+    background-color: rgb(75, 30, 30);
+    cursor: pointer
 }
 
 h1 {
@@ -69,4 +71,18 @@ h1 {
 #eight {
     border-right: 0;
     border-bottom: 0;
+}
+
+#reset {
+    margin-top: 20px;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 12px;
+    background: white;
+    color: rgb(223, 97, 97);
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
