@@ -1,7 +1,7 @@
 /*-------------------------------- Constants --------------------------------*/
 const message = document.querySelector('#message')
 const board = document.querySelectorAll('.sqr')
-const WINNING_COMBINATIONS = [
+const winPatterns = [
   [0, 1, 2],
   [3, 4, 5], 
   [6, 7, 8], 
@@ -13,9 +13,23 @@ const WINNING_COMBINATIONS = [
 ];
 /*------------------------ Cached Element References ------------------------*/
 let currentPlayer = 'X'
-
+let turnO = true;
 /*----------------------------- Event Listeners -----------------------------*/
-
+board.forEach((board) => {
+    board.addEventListener('click', function () {
+        if (turnO) {
+            board.innerText = 'O';
+            turnO = false;
+            board.disabled = true;
+            checkWinner();
+        } else {
+            board.innerText = 'X';
+            turnO = true;
+            board.disabled = true;
+            checkWinner();
+        }
+    });
+});
 /*-------------------------------- Functions --------------------------------*/
 board.forEach(function(event) {
    event.addEventListener('click', function() {
