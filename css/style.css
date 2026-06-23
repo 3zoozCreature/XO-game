@@ -1,0 +1,71 @@
+body {
+    background-color: rgb(233, 98, 98);
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.board {
+    display: flex;
+    flex-wrap: wrap;
+    width: 325px;
+    justify-content: center;
+}
+
+.sqr {
+    width: 30%;
+    aspect-ratio: 1/1;
+    border: 5px solid black;
+    font-size: 64px;
+    text-align: center;
+    
+}
+.sqr:hover {
+    background-color: deeppink;
+}
+
+h1 {
+    text-align: center;
+}
+
+#message {
+    text-align: center;
+}
+
+#zero {
+ border-top: 0;
+ border-left: 0;
+}
+
+#one {
+ border-top: 0;
+}
+
+#two {
+ border-top: 0;
+ border-right: 0;
+}
+
+#three {
+ border-left: 0;
+}
+
+#five {
+ border-right: 0;
+}
+
+#six {
+ border-bottom: 0;
+ border-left: 0;
+}
+
+#seven {
+ border-bottom: 0;
+}
+
+#eight {
+ border-right: 0;
+ border-bottom: 0;
+}
