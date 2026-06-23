@@ -9,61 +9,131 @@ const winningCombos = [
     [0, 4, 8],
     [2, 4, 6]
 ]
-let currentPlayer = 'X'
 
 /*------------------------ Cached Element References ------------------------*/
 const message = document.querySelector('#message')
 const squareEls = document.querySelectorAll('.sqr')
+
+/*-------------------------------- Variables --------------------------------*/
+let board
+let turn
+let winner
+let tie
+
 /*----------------------------- Event Listeners -----------------------------*/
 squareEls.forEach(function (square) {
-    square.addEventListener('click', function () {
-
-        if (square.textContent !== '') {
-            return
-        }
-
-        square.textContent = turn
-
-        if (turn === 'X') {
-            turn = 'O'
-            message.textContent = "Player O's Turn"
-        } else {
-            turn = 'X'
-            message.textContent = "Player X's Turn"
-        }
-    })
+    square.addEventListener('click', handleClick)
 })
+
 /*-------------------------------- Functions --------------------------------*/
 
 function init() {
+    board = ['', '', '', '', '', '', '', '', '']
     turn = 'X'
     winner = false
     tie = false
-    board = ['', '', '', '', '', '', '', '', '',]
-    message.textContent = "Player X's turn"
+
     render()
 }
 
-init()
-
 function render() {
-
+    updateBoard()
+    updateMessage()
 }
 
 function updateBoard() {
-    for (let i; i < board.length; i++) {
-        board[i].textContent = board[i]
+    for (let i = 0; i < board.length; i++) {
+        squareEls[i].textContent = board[i]
     }
 }
 
 function updateMessage() {
     if (winner === false && tie === false) {
-        message.textContent = "It's a Tie"
+        message.textContent = `Player ${turn}'s Turn`
     } else if (winner === false && tie === true) {
-        message.textContent = "It's a Tie"
+        message.textContent = "It's a Tie!"
     } else {
-                message.textContent = `🎉Player ${winner} is the Winner🎉`
-
+        message.textContent = `🎉 Player ${winner} Wins! 🎉`
     }
 }
-console.log(board)
+
+function handleClick(event) {
+    const squareIndex = Number(event.target.dataset.index)
+
+    if (winner) {
+        return
+    }
+
+    if (board[squareIndex] !== '') {
+        return
+    }
+
+    placePiece(squareIndex)
+
+    checkForWinner()
+
+    if (turn === 'X') {
+        turn = 'O'
+    } else {
+        turn = 'X'
+    }
+
+    render()
+}
+
+init()
+
+function placePiece(index) {
+    board[index] = turn
+}
+
+function checkForWinner() {
+
+    if (
+        board[0] !== '' && board[0] === board[1] && board[0] === board[2]
+    ) {
+        winner = turn
+    }
+
+    if (
+        board[3] !== '' && board[3] === board[4] && board[3] === board[5]
+    ) {
+        winner = turn
+    }
+
+    if (
+        board[6] !== '' && board[6] === board[7] && board[6] === board[8]
+    ) {
+        winner = turn
+    }
+
+    if (
+        board[0] !== '' && board[0] === board[3] && board[0] === board[6]
+    ) {
+        winner = turn
+    }
+
+    if (
+        board[1] !== '' && board[1] === board[4] && board[1] === board[7]
+    ) {
+        winner = turn
+    }
+
+    if (
+        board[2] !== '' && board[2] === board[5] && board[2] === board[8]
+    ) {
+        winner = turn
+    }
+
+    if (
+        board[0] !== '' && board[0] === board[4] && board[0] === board[8]
+    ) {
+        winner = turn
+    }
+
+    if (
+        board[2] !== '' && board[2] === board[4] && board[2] === board[6]
+    ) {
+        winner = turn
+    }
+}
